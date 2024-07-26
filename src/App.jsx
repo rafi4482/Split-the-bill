@@ -37,10 +37,21 @@ const Friends = () => {
 
 const Friend = ({ friend }) => {
   return (
-    <li key={friend.id}>
-      <img src={friend.image} alt={friend.name} />
-      <div>{friend.name}</div>
-      <div>Balance: {friend.balance}</div>
-    </li>
+    <div className="card bg-base-100 w-96 shadow-xl m-4">
+      <figure className="px-10 pt-10">
+        <div className="avatar">
+          <div className="w-12 rounded-full">
+            <img src={friend.image} alt={friend.name} />
+          </div>
+        </div>
+      </figure>
+      <div className="card-body items-center text-center">
+        <h2 className="card-title">{friend.name}</h2>
+        <p>If a dog chews shoes whose shoes does he choose?</p>
+        <div className="card-actions">
+          <button className="btn btn-primary">Select</button>
+        </div>
+      </div>
+    </div>
   );
 };
