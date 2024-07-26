@@ -50,7 +50,7 @@ const Friend = ({ friend }) => {
 
         {friend.balance < 0 && (
           <p className="text-red-500">
-            You owe {friend.name} {friend.balance}
+            You owe {friend.name} {Math.abs(friend.balance)}
           </p>
         )}
 
