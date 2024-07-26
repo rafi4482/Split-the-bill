@@ -1,3 +1,5 @@
+import React from "react";
+
 const initialFriends = [
   {
     id: 118836,
@@ -20,16 +22,21 @@ const initialFriends = [
 ];
 
 const App = () => {
-  return <Friends />;
+  return (
+    <div className="flex flex-col items-center">
+      <Friends />
+      <AddFriend />
+    </div>
+  );
 };
 
 export default App;
 
 const Friends = () => {
   return (
-    <ul>
+    <ul className="flex flex-col items-center">
       {initialFriends.map((friend) => (
-        <Friend friend={friend} />
+        <Friend key={friend.id} friend={friend} />
       ))}
     </ul>
   );
@@ -69,5 +76,31 @@ const Friend = ({ friend }) => {
         </div>
       </div>
     </div>
+  );
+};
+
+const AddFriend = () => {
+  return (
+    <form className="p-4 flex flex-col items-center">
+      <div className="form-control mb-4 w-full">
+        <input
+          type="text"
+          className="input input-bordered w-full"
+          placeholder="Friend's name"
+        />
+      </div>
+      <div className="form-control mb-4 w-full">
+        <input
+          type="text"
+          className="input input-bordered w-full"
+          placeholder="Image URL"
+        />
+      </div>
+      <div className="form-control mb-4 w-full">
+        <button type="submit" className="btn btn-primary w-1/2 mx-auto">
+          Add Friend
+        </button>
+      </div>
+    </form>
   );
 };
