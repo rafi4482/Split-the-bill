@@ -47,7 +47,23 @@ const Friend = ({ friend }) => {
       </figure>
       <div className="card-body items-center text-center">
         <h2 className="card-title">{friend.name}</h2>
-        <p>If a dog chews shoes whose shoes does he choose?</p>
+
+        {friend.balance < 0 && (
+          <p className="text-red-500">
+            You owe {friend.name} {friend.balance}
+          </p>
+        )}
+
+        {friend.balance > 0 && (
+          <p className="text-green-500">
+            {friend.name} owes you {friend.balance}
+          </p>
+        )}
+
+        {friend.balance === 0 && (
+          <p className="text-yellow-500">{friend.name} and you are even!</p>
+        )}
+
         <div className="card-actions">
           <button className="btn btn-primary">Select</button>
         </div>
