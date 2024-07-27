@@ -30,7 +30,9 @@ const App = () => {
         <Friends />
       </div>
       {showAddForm && <AddFriend />}
-      <Button onClick={() => setShowAddForm(!showAddForm)}>Add Friend</Button>
+      <Button onClick={() => setShowAddForm(!showAddForm)}>
+        {showAddForm ? "Close" : "Add Friend"}
+      </Button>
       <BillSplit />
     </div>
   );
