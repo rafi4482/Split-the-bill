@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const initialFriends = [
   {
@@ -22,32 +22,49 @@ const initialFriends = [
 ];
 
 const App = () => {
+  const [showAddForm, setShowAddForm] = useState(false);
+
   return (
-    <div className="flex flex-col items-center">
-      <Friends />
-      <AddFriend />
+    <div className="flex flex-col items-center space-y-4 p-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <Friends />
+      </div>
+      {showAddForm && <AddFriend />}
+      <Button onClick={() => setShowAddForm(!showAddForm)}>Add Friend</Button>
+      <BillSplit />
     </div>
   );
 };
-
 export default App;
+
+const Button = ({ children, onClick }) => {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="btn btn-primary w-1/4 mx-auto"
+    >
+      {children}
+    </button>
+  );
+};
 
 const Friends = () => {
   return (
-    <ul className="flex flex-col items-center">
+    <>
       {initialFriends.map((friend) => (
         <Friend key={friend.id} friend={friend} />
       ))}
-    </ul>
+    </>
   );
 };
 
 const Friend = ({ friend }) => {
   return (
-    <div className="card bg-base-100 w-96 shadow-xl m-4">
-      <figure className="px-10 pt-10">
+    <div className="card bg-base-100 shadow-xl m-4">
+      <figure className="px-5 pt-10">
         <div className="avatar">
-          <div className="w-12 rounded-full">
+          <div className="w-6 rounded-full">
             <img src={friend.image} alt={friend.name} />
           </div>
         </div>
@@ -82,23 +99,61 @@ const Friend = ({ friend }) => {
 const AddFriend = () => {
   return (
     <form className="p-4 flex flex-col items-center">
-      <div className="form-control mb-4 w-full">
+      <div className="form-control mb-4 w-full max-w-xs">
         <input
           type="text"
           className="input input-bordered w-full"
-          placeholder="Friend's name"
+          placeholder="🙍‍♂️ Friend's name"
+        />
+      </div>
+      <div className="form-control mb-4 w-full max-w-xs">
+        <input
+          type="text"
+          className="input input-bordered w-full"
+          placeholder="🌐 Image URL"
+        />
+      </div>
+      <div className="form-control mb-4 w-full"></div>
+    </form>
+  );
+};
+
+const BillSplit = () => {
+  return (
+    <form className="p-4 flex flex-col items-center mt-10 w-full max-w-md">
+      <h3 className="card-title mb-4">Split the bill</h3>
+      <div className="form-control mb-4 w-full">
+        <input
+          type="number"
+          className="input input-bordered w-full"
+          placeholder="💵 Bill Value"
         />
       </div>
       <div className="form-control mb-4 w-full">
         <input
-          type="text"
+          type="number"
           className="input input-bordered w-full"
-          placeholder="Image URL"
+          placeholder="😊 Your expense"
         />
       </div>
       <div className="form-control mb-4 w-full">
-        <button type="submit" className="btn btn-primary w-1/2 mx-auto">
-          Add Friend
+        <input
+          type="number"
+          className="input input-bordered w-full"
+          placeholder="🙍‍♂️ X expense"
+          disabled
+        />
+      </div>
+      <select className="select select-warning w-full mb-4">
+        <option disabled selected>
+          💰 Who's paying ?
+        </option>
+        <option>You</option>
+        <option>X</option>
+      </select>
+      <div className="form-control mb-4 w-full">
+        <button type="submit" className="btn btn-warning w-1/2 mx-auto">
+          Split
         </button>
       </div>
     </form>
